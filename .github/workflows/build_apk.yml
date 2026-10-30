@@ -23,6 +23,26 @@ jobs:
         flutter-version: '3.19.x'
         channel: 'stable'
 
+    - name: Create Clean Flutter Project Structure
+      run: |
+        # Simpan file main.dart dan pubspec.yaml sementara
+        mkdir -p temp_backup
+        cp lib/main.dart temp_backup/
+        cp pubspec.yaml temp_backup/
+
+        # Buat project flutter baru yang lengkap dengan folder android/
+        cd ..
+        flutter create temp_app --org com.imax3.tci --platforms=android
+        
+        # Pindahkan kembali lib dan pubspec ke project baru
+        cd temp_app
+        cp ../${{ github.event.repository.name }}/temp_backup/main.dart lib/
+        cp ../${{ github.event.repository.name }}/temp_backup/pubspec.yaml .
+        
+        # Pindahkan isi project baru ke direktori kerja utama
+        rsync -av --exclude='.git' . ../${{ github.event.repository.name }}/
+        cd ../${{ github.event.repository.name }}
+
     - name: Install Dependencies
       run: flutter pub get
 
