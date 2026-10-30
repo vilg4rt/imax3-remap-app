@@ -1,0 +1,22 @@
+name: imax3_tci_controller
+description: "Aplikasi Remap & Controller BRT i-MAX 3 TCI"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  usb_serial: ^0.5.0
+  fl_chart: ^0.68.0
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
